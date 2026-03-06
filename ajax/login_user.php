@@ -5,7 +5,6 @@
 	$login = $_POST['login'];
 	$password = $_POST['password'];
 	
-	// ищем пользователя
 	$query_user = $mysqli->query("SELECT * FROM `users` WHERE `login`='".$login."';");
 	
 	$id = -1;
@@ -20,8 +19,8 @@
 		$_SESSION['mail'] = $login;
 		$_SESSION['preuser'] = $id;
 		echo md5(md5($id));
-	} else {
-		echo '';
 	}
-	
+	else {
+		echo "";
+	}
 ?>

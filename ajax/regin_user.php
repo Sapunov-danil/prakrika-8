@@ -22,10 +22,16 @@
 		$mysqli->query("INSERT INTO `users`(`login`, `password`, `roll`) VALUES ('".$login."', '".$password."', 0)");
 		
 		$query_user = $mysqli->query("SELECT * FROM `users` WHERE `login`='".$login."' AND `password`= '".$password."';");
+
 		$user_new = $query_user->fetch_row();
 		$id = $user_new[0];
 			
 		if($id != -1) $_SESSION['user'] = $id; // запоминаем пользователя
+
+		$token = $password;
+        $_SESSION['token'] = $token;
+        $mysqli->query("UPDATE `users` SET `token` = '{$token}' WHERE `id` = ".$_SESSION['user']);
+
 		echo $id;
 	}
 ?>
